@@ -8,7 +8,7 @@ const Discord = require("discord.js");
  */
 exports.embed = function(body, title = "Info:") {
 
-	const date = new(Date.now())
+	const date = new Date(Date.now());
 
 	const embedreply = new Discord.MessageEmbed();
 	embedreply.setColor('a039a0')

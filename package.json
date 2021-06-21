@@ -12,6 +12,7 @@
   "author": "KifoPL <kifounaabi@gmail.com> (https://github.com/KifoPL)",
   "license": "ISC",
   "dependencies": {
+    "discord.js": "^12.5.3",
     "np": "^7.5.0"
   }
 }
