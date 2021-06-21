@@ -1,5 +1,5 @@
 # kifo
- NPM package to make the Kifo Clanker™ cleaner and easier to manage
+ NPM package to make the Kifo Clanker™ cleaner and easier to manage.
 
 ## Installation
 1. `npm install kifo` in your terminal
@@ -14,3 +14,9 @@
 
 ### `embed(body, title = null)`
 - converts string (`body`) with optional title to embed message.
+
+## Links
+- [npm package site](https://www.npmjs.com/package/kifo),
+- [The Galactic Republic Discord Server](https://discord.gg/invite/thegalacticrepublic)
+- [Discord Support Server](https://discord.com/invite/HxUFQCxPFp)
+- [PayPal](https://paypal.me/Michal3run) - *(electricity and internet bills cost a lot of money, donations motivate me to continue my work developing this package and the bot)*
