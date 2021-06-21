@@ -1,0 +1,14 @@
+{
+  "name": "kifo",
+  "version": "1.0.0",
+  "description": "NPM package to make the Kifo Clanker™ cleaner and easier to manage",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "kifo"
+  ],
+  "author": "KifoPL <kifounaabi@gmail.com> (https://github.com/KifoPL)",
+  "license": "ISC"
+}
