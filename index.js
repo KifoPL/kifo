@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
 const fs = require("fs");
-const contents = fs.readFileSync(`./node_modules/kifo/prefixes.json`);
-const jsonPrefixes = JSON.parse(contents);
+const jsonPrefixes = require(`./prefixes.json`);
 
 /**
  * 
