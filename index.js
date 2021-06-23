@@ -28,8 +28,5 @@ exports.embed = function(body, title = "Info:") {
  * @returns prefix used in the guild (or default "!kifo ")
  */
 exports.prefix = function(guildID) {
-	if (jsonPrefixes[guildID] !== undefined) {
-		return jsonPrefixes[guildID].prefix;
-	}
-	else return `!kifo `;
+	return jsonPrefixes[guildID].prefix;
 }

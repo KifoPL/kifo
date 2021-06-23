@@ -4,5 +4,17 @@
 		"prefix": "!kifo ",
 		"times_changed": 0,
 		"ownerID": "289119054130839552"
+	},
+	"undefined": {
+		"name": "default",
+		"prefix": "!kifo ",
+		"times_changed": 0,
+		"ownerID": "n/a"
+	},
+	"null": {
+		"name": "default",
+		"prefix": "!kifo ",
+		"times_changed": 0,
+		"ownerID": "n/a"
 	}
 }
