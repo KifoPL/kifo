@@ -15,6 +15,9 @@
 ### `embed(body, title = null)`
 - converts string (`body`) with optional title to embed message.
 
+### `prefix(guildID)`
+- returns prefix used in the guild or default `!kifo `.
+
 ## Links
 - [npm package site](https://www.npmjs.com/package/kifo),
 - [The Galactic Republic Discord Server](https://discord.gg/invite/thegalacticrepublic)

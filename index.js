@@ -1,4 +1,7 @@
 const Discord = require("discord.js");
+const fs = require("fs");
+const contents = fs.readFileSync(`./prefixes.json`);
+const jsonPrefixes = JSON.parse(contents);
 
 /**
  * 
@@ -18,4 +21,15 @@ exports.embed = function(body, title = "Info:") {
 	.setFooter(`by KifoPL, sent at: ${date.toUTCString()}.`)
 
 	return embedreply;
+}
+/**
+ * 
+ * @param {string} guildID ID of the guild from which the message is called.
+ * @returns prefix used in the guild (or default "!kifo ")
+ */
+exports.prefix = function(guildID) {
+	if (jsonPrefixes[guildID] !== undefined) {
+		return jsonPrefixes[guildID].prefix;
+	}
+	else return `!kifo `;
 }
