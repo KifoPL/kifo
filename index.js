@@ -39,6 +39,14 @@ exports.emojiRegex = function() {
 }
 
 /**
+ * 
+ * @returns RegEx fitting all URLs starting with http:// or https://
+ */
+exports.urlRegex = function() {
+	return /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)/g;
+}
+
+/**
  * Id, name, type, aliases of channel perms.
  */
 exports.channelPerms = [
