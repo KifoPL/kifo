@@ -21,14 +21,6 @@ exports.embed = function(body, title = "Info:") {
 
 	return embedreply;
 }
-/**
- * 
- * @param {string} guildID ID of the guild from which the message is called.
- * @returns prefix used in the guild (or default "!kifo ")
- */
-exports.prefix = function(guildID) {
-	return jsonPrefixes[guildID].prefix;
-}
 
 /**
  * 

@@ -10,13 +10,36 @@
 > make sure you have [`npm`](https://www.npmjs.com/get-npm) installed.
 
 ## Features
-> Main usage of this package is to help develop Kifo Clanker™. However, in the future there may be actually useful features that other bot developers could use.
+> Main usage of this package is to help develop Kifo Clanker™. However, there are some actually useful features that other bot developers could use (like RegExs).
 
 ### `embed(body, title = null)`
-- converts string (`body`) with optional title to embed message.
+- converts string (`body`) with optional title to `embed message`.
 
 ### `prefix(guildID)`
-- returns prefix used in the guild or default `!kifo `.
+- returns `prefix` used in the guild or default `!kifo `.
+
+### `emojiRegex`
+- returns `RegEx` fitting all Unicode Emojis.
+
+### `urlRegex`
+- returns `RegEx` fitting all URLs starting with http:// or https://
+
+### `channelPerms`
+- returns array with `Id`, `name`, `type`, `aliases` of `channel perms`.
+- example:
+	```
+	[
+		(VIEW_CHANNEL = {
+		Id: 1,
+		name: "VIEW_CHANNEL",
+		type: "text",
+		aliases: ["view", "vch"],
+	}),
+	.
+	.
+	.
+	]
+	```
 
 ## Links
 - [npm package site](https://www.npmjs.com/package/kifo),
