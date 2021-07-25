@@ -12,22 +12,20 @@
 ## Features
 > Main usage of this package is to help develop Kifo Clanker™. However, there are some actually useful features that other bot developers could use (like RegExs).
 
-### `embed(body, title = null)`
+### `embed(body, title = "Info:", perpetrator = null, client = null)`
 - converts string (`body`) with optional title to `embed message`.
-
-### `prefix(guildID)`
-- returns `prefix` used in the guild or default `!kifo `.
+> - `perpetrator` - `Discord.User` that used the command (visible in footer)
+> - `client` - `Discord.Client` that instantiated this (visible in title)
 
 ### `emojiRegex`
 - returns `RegEx` fitting all Unicode Emojis.
 
 ### `urlRegex`
-- returns `RegEx` fitting all URLs starting with http:// or https://
+- returns `RegEx` fitting all URLs starting with `http://` or `https://`
 
 ### `channelPerms`
 - returns array with `Id`, `name`, `type`, `aliases` of `channel perms`.
-- example:
-	```
+#### example:
 	[
 		(VIEW_CHANNEL = {
 		Id: 1,
@@ -35,11 +33,8 @@
 		type: "text",
 		aliases: ["view", "vch"],
 	}),
-	.
-	.
-	.
+	...
 	]
-	```
 
 ## Links
 - [npm package site](https://www.npmjs.com/package/kifo),

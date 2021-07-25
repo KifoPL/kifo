@@ -6,9 +6,10 @@ const fs = require("fs");
  * @param {string} body Description of message embed.
  * @param {string} title Title of message embed. Default: "Info:"
  * @param {*} client The client that instantiated this (visible in title)
+ * @param {*} perpetrator Discord.User that used the command (tagged in footer)
  * @returns 
  */
-exports.embed = function (body, title = "Info:", client = null) {
+exports.embed = function (body, title = "Info:", perpetrator = null, client = null) {
 
 	const date = new Date(Date.now());
 
@@ -17,7 +18,7 @@ exports.embed = function (body, title = "Info:", client = null) {
 		.setAuthor(`Powered by ${client?.user?.username ?? "Kifo Clanker™"}`, null, `https://kifopl.github.io/kifo-clanker/`)
 		.setTitle(title)
 		.setDescription(body)
-		.setFooter(`by KifoPL, sent at: ${date.toUTCString()}.`)
+		.setFooter(`${perpetrator == null ? "N" : `Command issued by ${perpetrator.tag}, n`}pm by KifoPL, sent at: ${date.toUTCString()}.`)
 
 	return embedreply;
 }
