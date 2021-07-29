@@ -1,6 +1,6 @@
 {
   "name": "kifo",
-  "version": "1.7.1",
+  "version": "2.0.0",
   "description": "NPM package to make the Kifo Clanker™ cleaner and easier to manage",
   "main": "index.js",
   "scripts": {
