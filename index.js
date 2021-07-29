@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const fs = require("fs");
+const kifo = require("./index.js");
 
 /**
  *
@@ -42,9 +43,94 @@ exports.embed = function (
  * @returns raw Id as a string
  */
 exports.mentionTrim = function (mention) {
-	if (mention.startsWith("<") && mention.endsWith(">")) mention = mention.slice(2, -1);
-	if (mention.startsWith("&") || mention.startsWith("!")) mention = mention.slice(1);
-	return mention;
+	return mention.replace(/[^\d\w]/g, "");
+};
+
+/**
+ * Returns Id of emoji, really handy for handling reactions, etc.
+ * @param {*} emojiIdentifier The <a:name:id>, <:name:id>, a:name:id or name:id emoji identifier string of an emoji
+ * @returns emoji Id
+ */
+exports.emojiTrim = function (emojiIdentifier) {
+	return emojiIdentifier.replace(/[^\d]/g, "");
+};
+
+/**
+ *
+ * @param {*} message The message sent
+ * @param {*} whatisthis The argument in question (either mention or Id)
+ * @param {*} allowWords True if "me" results in member and "here" in channel (case in-sensitive), false otherwise.
+ * @param {*} callback { entity: `GuildMember` or `GuildChannel` or `GuildRole` or `GuildMessage` or `undefined`, whatami: "member" or "channel" or "role" or "message" or "not found" (that's because if the function breaks, it will return `undefined`, + it's easier to do if statements)}
+ * @returns
+ */
+exports.whatamifunc = async function (
+	message,
+	whatisthis,
+	allowWords,
+	callback
+) {
+	let entity = undefined;
+	let whatami = "not found";
+
+	whatisthis = kifo.mentionTrim(whatisthis);
+
+	if (whatisthis.toUpperCase() == "ME" && allowWords) {
+		entity = message.member;
+		whatami = "user";
+		callback({ entity: entity, whatami: whatami });
+		return;
+	} else if (whatisthis.toUpperCase() == "HERE") {
+		entity = message.channel;
+		whatami = "channel";
+		callback({ entity: entity, whatami: whatami });
+	} else {
+		if (!message.guild.members.resolve(whatisthis)) {
+			if (!message.guild.roles.resolve(whatisthis)) {
+				if (!message.guild.channels.resolve(whatisthis)) {
+					await message.guild.channels.cache
+						.filter((ch) => ch.isText())
+						.each(async (ch) => {
+							await ch.messages
+								.fetch(whatisthis)
+								.then((msg) => {
+									entity = msg;
+									whatami = "message";
+									callback({
+										entity: entity,
+										whatami: whatami,
+									});
+									return;
+								})
+								.catch(() => { });
+						});
+					if (entity != undefined) {
+						whatami = "message";
+					} else {
+						whatami = "not found";
+						callback({ entity: entity, whatami: whatami });
+						return;
+					}
+				} else {
+					whatami = "channel";
+					entity = message.guild.channels.resolve(whatisthis);
+					callback({ entity: entity, whatami: whatami });
+					return;
+				}
+			} else {
+				whatami = "role";
+				entity = message.guild.roles.resolve(whatisthis);
+				callback({ entity: entity, whatami: whatami });
+				return;
+			}
+		} else {
+			whatami = "user";
+			entity = message.guild.members.cache.find(
+				(member) => member.id == whatisthis
+			);
+			callback({ entity: entity, whatami: whatami });
+			return;
+		}
+	}
 };
 
 /**
@@ -102,7 +188,7 @@ exports.channelPerms = [
 		Id: 6,
 		name: "SEND_MESSAGES",
 		type: "text",
-		aliases: ["sm", "msg", "msgs"],
+		aliases: ["sm", "msg", "msgs", "send"],
 	}),
 	(EMBED_LINKS = {
 		Id: 7,
