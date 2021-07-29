@@ -17,6 +17,10 @@
 > - `perpetrator` - `Discord.User` that used the command (visible in footer)
 > - `client` - `Discord.Client` that instantiated this (visible in title)
 
+### `mentionTrim(mention)`
+- Trims mentions to Ids. For instance, "`<@KifoPL>`" returns "`KifoPL`", "`<@&123123123>`" returns "`123123123`", "`42069`" returns "`42069`".
+> - `mention` -  `string` to trim.
+
 ### `emojiRegex`
 - returns `RegEx` fitting all Unicode Emojis.
 

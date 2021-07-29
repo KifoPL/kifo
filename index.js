@@ -37,8 +37,8 @@ exports.embed = function (
 };
 
 /**
- * Trims mentions to Ids. For instance, "<@KifoPL>" returns "KifoPL", "<@&123123123>" returns "123123123"
- * @param {str} mention the mention to trim
+ * Trims mentions to Ids. For instance, "`<@KifoPL>`" returns "`KifoPL`", "`<@&123123123>`" returns "`123123123`", "`42069`" returns "`42069`".
+ * @param {string} mention the mention to trim
  * @returns raw Id as a string
  */
 exports.mentionTrim = function (mention) {
