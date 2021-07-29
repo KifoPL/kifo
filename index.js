@@ -79,7 +79,7 @@ exports.whatamifunc = async function (
 		whatami = "user";
 		callback({ entity: entity, whatami: whatami });
 		return;
-	} else if (whatisthis.toUpperCase() == "HERE") {
+	} else if (whatisthis.toUpperCase() == "HERE" && allowWords) {
 		entity = message.channel;
 		whatami = "channel";
 		callback({ entity: entity, whatami: whatami });
