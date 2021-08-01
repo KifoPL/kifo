@@ -28,9 +28,10 @@ exports.embed = function (
 		.setTitle(title)
 		.setDescription(body)
 		.setFooter(
-			`${perpetrator == null
-				? "N"
-				: `Command issued by ${perpetrator.tag}, n`
+			`${
+				perpetrator == null
+					? "N"
+					: `Command issued by ${perpetrator.tag}, n`
 			}pm by KifoPL, sent at: ${date.toUTCString()}.`
 		);
 
@@ -53,6 +54,18 @@ exports.mentionTrim = function (mention) {
  */
 exports.emojiTrim = function (emojiIdentifier) {
 	return emojiIdentifier.replace(/[^\d]/g, "");
+};
+
+/**
+ * 
+ * @param {number} number the place
+ * @returns number with place abbreviation: for `1` returns `1st`, `2` - `2nd`, etc...
+ */
+exports.place = function (number) {
+	if (number % 10 == 1 && number % 100 != 11) return `st`;
+	if (number % 10 == 2 && number % 100 != 12) return "nd";
+	if (number % 10 == 3 && number % 100 != 13) return "rd";
+	else return "th";
 };
 
 /**
@@ -101,7 +114,7 @@ exports.whatamifunc = async function (
 									});
 									return;
 								})
-								.catch(() => { });
+								.catch(() => {});
 						});
 					if (entity != undefined) {
 						whatami = "message";

@@ -34,17 +34,12 @@ Returns Id of emoji, really handy for handling reactions, etc.
 
 > -   `emojiIdentifier` - The `<a:name:id>`, `<:name:id>`, `a:name:id` or `name:id` emoji identifier `string` of an emoji
 
-/\*\*
+### `place(number)`
 
--
--   @param {\*} message The message sent
--   @param {\*} whatisthis The argument in question (either mention or Id)
--   @param {\*} allowWords True if "me" results in member and "here" in channel (case in-sensitive), false otherwise.
--   @param {\*} callback { entity: `GuildMember` or `GuildChannel` or `GuildRole` or `GuildMessage` or `undefined`, whatami: "member" or "channel" or "role" or "message" or "not found" (that's because if the function breaks, it will return `undefined`, + it's easier to do if statements)}
--   @returns
-    \*/
+returns number with place abbreviation: for `1` returns `1st`, `2` - `2nd`, etc...
+> `number` - the place
 
-## `whatamifunc(message, whatisthis, allowWords, callback)`
+### `whatamifunc(message, whatisthis, allowWords, callback)`
 
 Determines, what the mention or Id is.
 
