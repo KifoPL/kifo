@@ -62,10 +62,10 @@ exports.emojiTrim = function (emojiIdentifier) {
  * @returns number with place abbreviation: for `1` returns `1st`, `2` - `2nd`, etc...
  */
 exports.place = function (number) {
-	if (number % 10 == 1 && number % 100 != 11) return `st`;
-	if (number % 10 == 2 && number % 100 != 12) return "nd";
-	if (number % 10 == 3 && number % 100 != 13) return "rd";
-	else return "th";
+	if (number % 10 == 1 && number % 100 != 11) return `${number}st`;
+	if (number % 10 == 2 && number % 100 != 12) return `${number}nd`;
+	if (number % 10 == 3 && number % 100 != 13) return `${number}rd`;
+	else return `${number}th`;
 };
 
 /**
