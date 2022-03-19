@@ -39,7 +39,7 @@ Returns Id of emoji, really handy for handling reactions, etc.
 returns number with place abbreviation: for `1` returns `1st`, `2` - `2nd`, etc...
 > `number` - the place
 
-### `whatamifunc(message, whatisthis, allowWords, callback)`
+### `whatAmIFunc(message, whatisthis, allowWords, callback)`
 
 Determines, what the mention or Id is.
 
@@ -51,7 +51,7 @@ Determines, what the mention or Id is.
 ```js
 {
 	entity: Discord.GuildMember || Discord.GuildChannel || Discord.GuildRole || Discord.Message || undefined,
-	whatami: "member" || "channel" || "role" || "message" || "not found" //(that's because if the function breaks, it will return `undefined`, + it's easier to do if statements)
+	whatAmI: "member" || "channel" || "role" || "message" || "not found" //(that's because if the function breaks, it will return `undefined`, + it's easier to do if statements)
 }
 ```
 

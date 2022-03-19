@@ -2,9 +2,11 @@
   "name": "kifo",
   "version": "2.1.1",
   "description": "NPM package to make the Kifo Clanker™ cleaner and easier to manage",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\""
+    "test": "echo \"Error: no test specified\"",
+    "build": "tsc --build",
+    "clean": "tsc --build --clean"
   },
   "keywords": [
     "kifo"
@@ -13,6 +15,12 @@
   "license": "ISC",
   "dependencies": {
     "discord.js": "^12.5.3",
-    "np": "^7.5.0"
-  }
+    "np": "^7.5.0",
+    "tsc": "^2.0.4",
+    "typescript": "^4.6.2"
+  },
+  "devDependencies": {
+    "@types/ws": "^8.5.3"
+  },
+  "types": "./src/types.d.ts"
 }
