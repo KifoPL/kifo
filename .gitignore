@@ -74,3 +74,8 @@ typings/
 
 # FuseBox cache
 .fusebox/
+/.idea/.gitignore
+/.idea/jsLibraryMappings.xml
+/.idea/kifo.iml
+/.idea/modules.xml
+/.idea/vcs.xml
