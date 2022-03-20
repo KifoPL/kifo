@@ -1,31 +1,43 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es6",
-    "sourceMap": true,
-    "allowJs": true,
-    "declaration": true,
-    "declarationDir": "./typings",
-    "outDir": "./dist",
+    // Type Checking
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    // if true: conflicts with discord-api-types
+    "exactOptionalPropertyTypes": false,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "strict": true,
-    "noImplicitAny": true
-    /* Raise error on expressions and declarations with an implied 'any' type. */,
-    "strictNullChecks": true
-    /* Enable strict null checks. */,
-    "strictFunctionTypes": true
-    /* Enable strict checking of function types. */,
-    "noUnusedLocals": true
-    /* Report errors on unused locals. */,
-    "noUnusedParameters": true
-    /* Report errors on unused parameters. */,
-    "noImplicitReturns": true
-    /* Report error when not all code paths in function return a value. */,
-    "noFallthroughCasesInSwitch": true
-    /* Report errors for fallthrough cases in switch statement. */,
-    "typeRoots": [
-      "./src",
-      "node_modules/@types"
-    ]
+    "useUnknownInCatchVariables": true,
+
+    // Modules
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+
+    // Emit
+    "declaration": true,
+    "importHelpers": true,
+    "importsNotUsedAsValues": "error",
+    "inlineSources": true,
+    "newLine": "lf",
+    "noEmitHelpers": true,
+    "outDir": "dist",
+    "preserveConstEnums": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+
+    // Language and Environment
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": ["ESNext"],
+    "target": "ES2021",
+    "useDefineForClassFields": true
   },
   "include": ["src"],
   "exclude": ["node_modules"]

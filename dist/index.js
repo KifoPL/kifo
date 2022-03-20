@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.channelPerms = exports.urlRegex = exports.emojiRegex = exports.mentionRegEx = exports.whatAmIFunc = exports.place = exports.emojiTrim = exports.mentionTrim = exports.embed = void 0;
 const discord_js_1 = require("discord.js");
@@ -20,11 +11,10 @@ const discord_js_1 = require("discord.js");
  * @returns
  */
 function embed(body, title = "Info:", perpetrator = null, client = null) {
-    var _a, _b;
     const date = new Date(Date.now());
     return new discord_js_1.MessageEmbed()
         .setColor("#a039a0")
-        .setAuthor(`Powered by ${(_b = (_a = client === null || client === void 0 ? void 0 : client.user) === null || _a === void 0 ? void 0 : _a.username) !== null && _b !== void 0 ? _b : "Kifo Clanker™"}`, undefined, `https://kifopl.github.io/kifo-clanker/`)
+        .setAuthor(`Powered by ${client?.user?.username ?? "Kifo Clanker™"}`, undefined, `https://kifopl.github.io/kifo-clanker/`)
         .setTitle(title)
         .setDescription(body)
         .setFooter(`${perpetrator == null
@@ -78,73 +68,72 @@ exports.place = place;
  * @param {*} callback { entity: `GuildMember` or `GuildChannel` or `GuildRole` or `GuildMessage` or `undefined`, whatAmI: "member" or "channel" or "role" or "message" or "not found" (that's because if the function breaks, it will return `undefined`, + it's easier to do if statements)}
  * @returns
  */
-function whatAmIFunc(message, whatIsThis, allowWords = false, callback) {
-    var _a, _b, _c, _d;
-    return __awaiter(this, void 0, void 0, function* () {
-        let entity = undefined;
-        let whatami = "not found";
-        whatIsThis = mentionTrim(whatIsThis);
-        if (whatIsThis.toUpperCase() == "ME" && allowWords) {
-            entity = message.member;
-            whatami = "member";
-            callback({ entity, whatAmI: "member" });
-            return;
-        }
-        else if (whatIsThis.toUpperCase() == "HERE" && allowWords) {
-            entity = message.channel;
-            whatami = "channel";
-            callback({ entity: entity, whatAmI: whatami });
-        }
-        else {
-            if (!((_a = message.guild) === null || _a === void 0 ? void 0 : _a.members.resolve(whatIsThis))) {
-                if (!((_b = message.guild) === null || _b === void 0 ? void 0 : _b.roles.resolve(whatIsThis))) {
-                    if (!((_c = message.guild) === null || _c === void 0 ? void 0 : _c.channels.resolve(whatIsThis))) {
-                        yield ((_d = message.guild) === null || _d === void 0 ? void 0 : _d.channels.cache.filter((ch) => ch.isText()).each((ch) => __awaiter(this, void 0, void 0, function* () {
-                            yield ch.messages
-                                .fetch(whatIsThis)
-                                .then((msg) => {
-                                entity = msg;
-                                whatami = "message";
-                                callback({
-                                    entity: entity,
-                                    whatAmI: whatami,
-                                });
-                                return;
-                            })
-                                .catch(() => {
-                            });
-                        })));
-                        if (entity != undefined) {
+async function whatAmIFunc(message, whatIsThis, allowWords = false, callback) {
+    let entity = undefined;
+    let whatami = "not found";
+    whatIsThis = mentionTrim(whatIsThis);
+    if (whatIsThis.toUpperCase() == "ME" && allowWords) {
+        entity = message.member;
+        whatami = "member";
+        callback({ entity, whatAmI: "member" });
+        return;
+    }
+    else if (whatIsThis.toUpperCase() == "HERE" && allowWords) {
+        entity = message.channel;
+        whatami = "channel";
+        callback({ entity: entity, whatAmI: whatami });
+    }
+    else {
+        if (!message.guild?.members.resolve(whatIsThis)) {
+            if (!message.guild?.roles.resolve(whatIsThis)) {
+                if (!message.guild?.channels.resolve(whatIsThis)) {
+                    await message.guild?.channels.cache
+                        .filter((ch) => ch.isText())
+                        .each(async (ch) => {
+                        await ch.messages
+                            .fetch(whatIsThis)
+                            .then((msg) => {
+                            entity = msg;
                             whatami = "message";
-                        }
-                        else {
-                            whatami = "not found";
-                            callback({ entity: entity, whatAmI: whatami });
+                            callback({
+                                entity: entity,
+                                whatAmI: whatami,
+                            });
                             return;
-                        }
+                        })
+                            .catch(() => {
+                        });
+                    });
+                    if (entity != undefined) {
+                        whatami = "message";
                     }
                     else {
-                        whatami = "channel";
-                        entity = message.guild.channels.resolve(whatIsThis);
+                        whatami = "not found";
                         callback({ entity: entity, whatAmI: whatami });
                         return;
                     }
                 }
                 else {
-                    whatami = "role";
-                    entity = message.guild.roles.resolve(whatIsThis);
+                    whatami = "channel";
+                    entity = message.guild.channels.resolve(whatIsThis);
                     callback({ entity: entity, whatAmI: whatami });
                     return;
                 }
             }
             else {
-                whatami = "member";
-                entity = message.guild.members.cache.find((member) => member.id == whatIsThis);
+                whatami = "role";
+                entity = message.guild.roles.resolve(whatIsThis);
                 callback({ entity: entity, whatAmI: whatami });
                 return;
             }
         }
-    });
+        else {
+            whatami = "member";
+            entity = message.guild.members.cache.find((member) => member.id == whatIsThis);
+            callback({ entity: entity, whatAmI: whatami });
+            return;
+        }
+    }
 }
 exports.whatAmIFunc = whatAmIFunc;
 ;
