@@ -14,8 +14,8 @@
   "author": "KifoPL <kifounaabi@gmail.com> (https://github.com/KifoPL)",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^12.5.3",
-    "np": "^7.5.0",
+    "discord.js": "^13.6.0",
+    "np": "^7.6.1",
     "tsc": "^2.0.4",
     "typescript": "^4.6.2"
   },

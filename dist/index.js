@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.channelPerms = exports.urlRegex = exports.emojiRegex = exports.mentionRegEx = exports.whatAmIFunc = exports.mentionTrim = exports.embed = void 0;
+exports.channelPerms = exports.urlRegex = exports.emojiRegex = exports.mentionRegEx = exports.whatAmIFunc = exports.place = exports.emojiTrim = exports.mentionTrim = exports.embed = void 0;
 const discord_js_1 = require("discord.js");
 /**
  *
@@ -23,7 +23,7 @@ function embed(body, title = "Info:", perpetrator = null, client = null) {
     var _a, _b;
     const date = new Date(Date.now());
     return new discord_js_1.MessageEmbed()
-        .setColor("a039a0")
+        .setColor("#a039a0")
         .setAuthor(`Powered by ${(_b = (_a = client === null || client === void 0 ? void 0 : client.user) === null || _a === void 0 ? void 0 : _a.username) !== null && _b !== void 0 ? _b : "Kifo Clanker™"}`, undefined, `https://kifopl.github.io/kifo-clanker/`)
         .setTitle(title)
         .setDescription(body)
@@ -48,15 +48,17 @@ exports.mentionTrim = mentionTrim;
  * @param {*} emojiIdentifier The <a:name:id>, <:name:id>, a:name:id or name:id emoji identifier string of an emoji
  * @returns emoji Id
  */
-exports.emojiTrim = function (emojiIdentifier) {
+function emojiTrim(emojiIdentifier) {
     return emojiIdentifier.replace(/[^\d]/g, "");
-};
+}
+exports.emojiTrim = emojiTrim;
+;
 /**
  *
  * @param {number} number the place
  * @returns number with place abbreviation: for `1` returns `1st`, `2` - `2nd`, etc...
  */
-exports.place = function (number) {
+function place(number) {
     if (number % 10 == 1 && number % 100 != 11)
         return `${number}st`;
     if (number % 10 == 2 && number % 100 != 12)
@@ -65,7 +67,9 @@ exports.place = function (number) {
         return `${number}rd`;
     else
         return `${number}th`;
-};
+}
+exports.place = place;
+;
 /**
  *
  * @param {*} message The message sent
